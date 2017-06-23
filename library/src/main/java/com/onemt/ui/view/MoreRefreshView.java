@@ -2,7 +2,6 @@ package com.onemt.ui.view;
 
 import android.content.Context;
 import android.graphics.drawable.AnimationDrawable;
-import android.widget.ImageView;
 
 /**
  * more refreshing view
@@ -12,7 +11,8 @@ import android.widget.ImageView;
  */
 public class MoreRefreshView extends BaseAnimationRefreshView {
 
-    public MoreRefreshView(Context context, ImageView containerView,AnimationDrawable drawable) {
-        super(context,containerView,drawable);
+    public MoreRefreshView(Context context, AnimationDrawable drawable) {
+        super(context,drawable);
     }
+
 }

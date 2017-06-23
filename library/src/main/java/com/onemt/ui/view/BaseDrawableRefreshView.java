@@ -5,6 +5,7 @@ import android.graphics.ColorFilter;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
+import android.widget.ImageView;
 
 import com.onemt.ui.PullToRefreshView;
 
@@ -12,6 +13,8 @@ import com.onemt.ui.PullToRefreshView;
 public abstract class BaseDrawableRefreshView extends Drawable implements Drawable.Callback, SuperRefreshView {
 
     private PullToRefreshView mRefreshLayout;
+
+    ImageView mContainerView;
 
     public BaseDrawableRefreshView(Context context, PullToRefreshView layout) {
         mRefreshLayout = layout;
@@ -23,6 +26,12 @@ public abstract class BaseDrawableRefreshView extends Drawable implements Drawab
 
     public PullToRefreshView getRefreshLayout() {
         return mRefreshLayout;
+    }
+
+
+    @Override
+    public void setContainerView(ImageView containerView) {
+        this.mContainerView = containerView;
     }
 
     @Override

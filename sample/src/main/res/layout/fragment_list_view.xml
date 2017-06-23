@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.onemt.ui.PullToRefreshView
+<!--    <com.onemt.ui.PullToRefreshView
         android:id="@+id/pull_to_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -13,7 +13,7 @@
         refreshView:bottomDragDistance="30dp"
         refreshView:pullTopElastic="true"
         refreshView:pullBottomElastic="true"
-        >
+        >-->
 
         <ListView
             android:id="@+id/list_view"
@@ -23,6 +23,6 @@
             android:dividerHeight="0dp"
             android:fadingEdge="none" />
 
-    </com.onemt.ui.PullToRefreshView>
+    <!--</com.onemt.ui.PullToRefreshView>-->
 
 </RelativeLayout>

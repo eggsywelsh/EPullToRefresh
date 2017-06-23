@@ -24,9 +24,8 @@ public abstract class BaseAnimationRefreshView implements SuperRefreshView {
      */
     AnimationDrawable mAnimationDrawable;
 
-    public BaseAnimationRefreshView(Context context, ImageView containerView, AnimationDrawable animationDrawable) {
+    public BaseAnimationRefreshView(Context context, AnimationDrawable animationDrawable) {
         this.mContext = context;
-        this.mContainerView = containerView;
         this.mAnimationDrawable = animationDrawable;
     }
 
@@ -66,5 +65,10 @@ public abstract class BaseAnimationRefreshView implements SuperRefreshView {
     @Override
     public Drawable obtainRefreshDrawable() {
         return mAnimationDrawable;
+    }
+
+    @Override
+    public void setContainerView(ImageView containerView) {
+        this.mContainerView = containerView;
     }
 }

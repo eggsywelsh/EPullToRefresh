@@ -16,7 +16,7 @@ import static com.onemt.ui.PullToRefreshView.MAX_OFFSET_ANIMATION_DURATION;
  * @author chenyongkang
  * @Date 2017/5/27 15:10
  */
-final class TopPullToRefresh extends BasePullToRefreshData implements BasePullToRefresh {
+public final class TopPullToRefresh extends BasePullToRefreshData implements BasePullToRefresh {
 
     private static final float DECELERATE_INTERPOLATION_FACTOR = 2f;
 
@@ -52,8 +52,8 @@ final class TopPullToRefresh extends BasePullToRefreshData implements BasePullTo
 
     @Override
     public void setRefreshing(boolean refreshing) {
-        if (mIsRefreshing != refreshing) {
-            setRefreshing(refreshing, false /* mNotify */);
+        if (isRefreshing != refreshing) {
+            setRefreshing(refreshing, false /* isNotify */);
         }
     }
 
@@ -81,11 +81,11 @@ final class TopPullToRefresh extends BasePullToRefreshData implements BasePullTo
 
     @Override
     public void setRefreshing(boolean refreshing, boolean notify) {
-        if (mIsRefreshing != refreshing) {
-            super.mNotify = notify;
+        if (isRefreshing != refreshing) {
+            super.isNotify = notify;
             mTarget.ensureTarget();
-            super.mIsRefreshing = refreshing;
-            if (mIsRefreshing) {
+            super.isRefreshing = refreshing;
+            if (isRefreshing) {
                 mRefreshView.setPercent(1f, true);
                 animateOffsetToCorrectPosition();
             } else {
@@ -96,9 +96,9 @@ final class TopPullToRefresh extends BasePullToRefreshData implements BasePullTo
 
     @Override
     public void animateOffsetToStartPosition() {
-        mFrom = mTarget.getCurrentOffsetTop();
-        mFromDragPercent = mTarget.getCurrentDragPercent();
-        long animationDuration = Math.abs((long) (MAX_OFFSET_ANIMATION_DURATION * mFromDragPercent));
+        from = mTarget.getCurrentOffsetTop();
+        fromDragPercent = mTarget.getCurrentDragPercent();
+        long animationDuration = Math.abs((long) (MAX_OFFSET_ANIMATION_DURATION * fromDragPercent));
 
         mAnimateToStartPosition.reset();
         mAnimateToStartPosition.setDuration(animationDuration);
@@ -110,8 +110,8 @@ final class TopPullToRefresh extends BasePullToRefreshData implements BasePullTo
 
     @Override
     public void animateOffsetToCorrectPosition() {
-        mFrom = mTarget.getCurrentOffsetTop();
-        mFromDragPercent = mTarget.getCurrentDragPercent();
+        from = mTarget.getCurrentOffsetTop();
+        fromDragPercent = mTarget.getCurrentDragPercent();
 
         mAnimateToCorrectPosition.reset();
         mAnimateToCorrectPosition.setDuration(MAX_OFFSET_ANIMATION_DURATION);
@@ -119,9 +119,9 @@ final class TopPullToRefresh extends BasePullToRefreshData implements BasePullTo
         mContainerView.clearAnimation();
         mContainerView.startAnimation(mAnimateToCorrectPosition);
 
-        if (mIsRefreshing) {
+        if (isRefreshing) {
             mRefreshView.start();
-            if (mNotify) {
+            if (isNotify) {
                 if (mOnRefreshListener != null) {
                     mOnRefreshListener.onRefresh();
                 }
@@ -138,10 +138,10 @@ final class TopPullToRefresh extends BasePullToRefreshData implements BasePullTo
         public void applyTransformation(float interpolatedTime, Transformation t) {
             int targetTop;
             int endTarget = mTarget.getTotalTopDragDistance();
-            targetTop = (mFrom + (int) ((endTarget - mFrom) * interpolatedTime));
+            targetTop = (from + (int) ((endTarget - from) * interpolatedTime));
             int offset = targetTop - mTarget.getTargetViewTop();
 
-            mTarget.setCurrentDragPercent(mFromDragPercent - (mFromDragPercent - 1.0f) * interpolatedTime);
+            mTarget.setCurrentDragPercent(fromDragPercent - (fromDragPercent - 1.0f) * interpolatedTime);
             mRefreshView.setPercent(mTarget.getCurrentDragPercent(), false);
 
             offsetTopAndBottom(offset, false);
@@ -156,8 +156,8 @@ final class TopPullToRefresh extends BasePullToRefreshData implements BasePullTo
     };
 
     private void moveToStart(float interpolatedTime) {
-        int targetTop = mFrom - (int) (mFrom * interpolatedTime);
-        float targetPercent = mFromDragPercent * (1.0f - interpolatedTime);
+        int targetTop = from - (int) (from * interpolatedTime);
+        float targetPercent = fromDragPercent * (1.0f - interpolatedTime);
         int offset = targetTop - mTarget.getTargetViewTop();
 
         mTarget.setCurrentDragPercent(targetPercent);

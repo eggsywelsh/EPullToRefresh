@@ -18,7 +18,7 @@ public interface BasePullToRefresh {
     void setRefreshView(SuperRefreshView refreshView);
 
     /**
-     * set is refreshing,and mNotify listener if exists
+     * set is refreshing,and isNotify listener if exists
      *
      * @param refreshing
      * @param notify     true,should be notify to the {@link PullToRefreshView.OnRefreshListener}

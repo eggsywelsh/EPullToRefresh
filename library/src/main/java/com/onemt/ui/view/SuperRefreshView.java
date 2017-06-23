@@ -2,6 +2,7 @@ package com.onemt.ui.view;
 
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
+import android.widget.ImageView;
 
 /**
  * super refreshing view
@@ -16,5 +17,7 @@ public interface SuperRefreshView extends Animatable {
     void offsetTopAndBottom(int offset);
 
     Drawable obtainRefreshDrawable();
+
+    void setContainerView(ImageView containerView);
 
 }

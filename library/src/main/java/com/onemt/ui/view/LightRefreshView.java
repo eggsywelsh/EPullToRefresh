@@ -46,8 +46,6 @@ public class LightRefreshView extends BaseDrawableRefreshView implements Animata
 
     private PullToRefreshView mParent;
 
-    private ImageView mContainerView;
-
     private Context mContext;
 
     private float mPercent = 0.0f;
@@ -66,15 +64,13 @@ public class LightRefreshView extends BaseDrawableRefreshView implements Animata
 
     private Bitmap mLine;
 
-    public LightRefreshView(Context context, final PullToRefreshView parent, ImageView containerView) {
+    public LightRefreshView(Context context, final PullToRefreshView parent) {
 
         super(context, parent);
 
         this.mContext = context;
 
         this.mParent = parent;
-
-        this.mContainerView = containerView;
 
         this.mPaint = new Paint();
 
@@ -95,14 +91,18 @@ public class LightRefreshView extends BaseDrawableRefreshView implements Animata
 
         mScreenWidth = viewWidth;
 
-        mContainerView.setBackground(mContext.getResources().getDrawable(R.drawable.moon_header_bg));
-
-        mContainerView.setScaleType(ImageView.ScaleType.FIT_XY);
-
         mLightWidth = mContext.getResources().getDimensionPixelSize(R.dimen.refresh_view_light_width);
         mLightHeight = mContext.getResources().getDimensionPixelSize(R.dimen.refresh_view_light_height);
 
         createBitmaps();
+    }
+
+    @Override
+    public void setContainerView(ImageView containerView) {
+        super.setContainerView(containerView);
+        mContainerView.setBackground(mContext.getResources().getDrawable(R.drawable.moon_header_bg));
+
+        mContainerView.setScaleType(ImageView.ScaleType.FIT_XY);
     }
 
     private void createBitmaps() {
@@ -138,7 +138,7 @@ public class LightRefreshView extends BaseDrawableRefreshView implements Animata
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 int index = (int) animation.getAnimatedValue();
-                Log.d(PullToRefreshView.TAG,"index "+index);
+                Log.d(PullToRefreshView.TAG, "index " + index);
                 mAnimationPlayIndex = index;
                 invalidateSelf();
             }
@@ -178,7 +178,7 @@ public class LightRefreshView extends BaseDrawableRefreshView implements Animata
 
     private void drawLight(Canvas canvas) {
         if (mParent.getTargetOffsetTop() > mParent.getTopTotalDragDistance()) {
-            Log.d(PullToRefreshView.TAG,"[drawLight] more. mParent.getTargetOffsetTop()="+mParent.getTargetOffsetTop()+" , mLightHeight="+mLightHeight);
+            Log.d(PullToRefreshView.TAG, "[drawLight] more. mParent.getTargetOffsetTop()=" + mParent.getTargetOffsetTop() + " , mLightHeight=" + mLightHeight);
             Drawable d = mSourceAnimationDrawable.getFrame(MAX_ANIMATION_PLAY_INDEX);
             d.setBounds((mScreenWidth - d.getIntrinsicWidth()) / 2,
                     mParent.getTargetOffsetTop() - mLightHeight,
@@ -186,8 +186,8 @@ public class LightRefreshView extends BaseDrawableRefreshView implements Animata
                     mParent.getTargetOffsetTop()
             );
             d.draw(canvas);
-        } else if(mParent.getTargetOffsetTop() == mParent.getTopTotalDragDistance()){
-            Log.d(PullToRefreshView.TAG,"[drawLight] less. mParent.getTargetOffsetTop()="+mParent.getTargetOffsetTop()+" , mLightHeight="+mLightHeight);
+        } else if (mParent.getTargetOffsetTop() == mParent.getTopTotalDragDistance()) {
+            Log.d(PullToRefreshView.TAG, "[drawLight] less. mParent.getTargetOffsetTop()=" + mParent.getTargetOffsetTop() + " , mLightHeight=" + mLightHeight);
             Drawable d = mSourceAnimationDrawable.getFrame(mAnimationPlayIndex);
             d.setBounds((mScreenWidth - d.getIntrinsicWidth()) / 2,
                     mParent.getTargetOffsetTop() - mLightHeight,
@@ -202,10 +202,10 @@ public class LightRefreshView extends BaseDrawableRefreshView implements Animata
 //            );
 //            mSourceAnimationDrawable.draw(canvas);
         } else {
-            if(mAnimationPlayIndex <= MIN_ANIMATION_PLAY_INDEX){
+            if (mAnimationPlayIndex <= MIN_ANIMATION_PLAY_INDEX) {
                 mAnimationPlayIndex = MAX_ANIMATION_PLAY_INDEX;
             }
-            Log.d(PullToRefreshView.TAG,"[drawLight] less. mParent.getTargetOffsetTop()="+mParent.getTargetOffsetTop()+" , mLightHeight="+mLightHeight);
+            Log.d(PullToRefreshView.TAG, "[drawLight] less. mParent.getTargetOffsetTop()=" + mParent.getTargetOffsetTop() + " , mLightHeight=" + mLightHeight);
             Drawable d = mSourceAnimationDrawable.getFrame(mAnimationPlayIndex);
             d.setBounds((mScreenWidth - d.getIntrinsicWidth()) / 2,
                     mParent.getTargetOffsetTop() - mLightHeight,

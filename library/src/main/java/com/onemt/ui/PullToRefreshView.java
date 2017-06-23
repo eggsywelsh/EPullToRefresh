@@ -94,13 +94,13 @@ public class PullToRefreshView extends ViewGroup {
 
         if (mIsPullTopToRefresh) {
             mCompTopToRefresh = new TopPullToRefresh(context, this, mTarget);
-            setTopRefreshView(new LightRefreshView(context, this,mCompTopToRefresh.getContainerView()));
+            setTopRefreshView(new LightRefreshView(context, this));
             addView(mCompTopToRefresh.getContainerView());
         }
 
         if (mIsPullBottomToRefresh) {
             mCompBottomToRefresh = new BottomPullToRefresh(context, this, mTarget);
-            MoreRefreshView moreRefreshView = new MoreRefreshView(context, mCompTopToRefresh.getContainerView(),
+            MoreRefreshView moreRefreshView = new MoreRefreshView(context,
                     (AnimationDrawable) context.getResources().getDrawable(R.drawable.list_bottom_load_more));
             setBottomRefreshView(moreRefreshView);
             addView(mCompBottomToRefresh.getContainerView(), getChildCount());
@@ -112,6 +112,7 @@ public class PullToRefreshView extends ViewGroup {
 
     public void setTopRefreshView(SuperRefreshView view) {
         if (mIsPullTopToRefresh && mCompTopToRefresh != null) {
+            view.setContainerView(mCompTopToRefresh.getContainerView());
             mCompTopToRefresh.setRefreshView(view);
         }
     }
@@ -187,7 +188,7 @@ public class PullToRefreshView extends ViewGroup {
         int height = getMeasuredHeight();
         int width = getMeasuredWidth();
         if (mCompTopToRefresh != null) {
-            mCompTopToRefresh.updateRefreshViewLayout(left, top, left + width - right, (top + height - bottom));
+            mCompTopToRefresh.updateRefreshViewLayout(left, top, left + width - right, (top + height - bottom)/2);
         }
 
         if (mCompBottomToRefresh != null) {

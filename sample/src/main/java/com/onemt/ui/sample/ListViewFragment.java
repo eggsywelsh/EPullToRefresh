@@ -10,8 +10,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 
-import com.onemt.ui.PullToRefreshView;
-
 import java.util.List;
 import java.util.Map;
 
@@ -20,7 +18,7 @@ import java.util.Map;
  */
 public class ListViewFragment extends BaseRefreshFragment {
 
-    private PullToRefreshView mPullToRefreshView;
+//    private PullToRefreshView mPullToRefreshView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -29,7 +27,7 @@ public class ListViewFragment extends BaseRefreshFragment {
         ListView listView = (ListView) rootView.findViewById(R.id.list_view);
         listView.setAdapter(new SampleAdapter(getActivity(), R.layout.list_item, mSampleList));
 
-        mPullToRefreshView = (PullToRefreshView) rootView.findViewById(R.id.pull_to_refresh);
+        /*mPullToRefreshView = (PullToRefreshView) rootView.findViewById(R.id.pull_to_refresh);
 
         mPullToRefreshView.setOnTopRefreshListener(new PullToRefreshView.OnRefreshListener() {
             @Override
@@ -53,7 +51,7 @@ public class ListViewFragment extends BaseRefreshFragment {
                     }
                 }, REFRESH_DELAY);
             }
-        });
+        });*/
 
         return rootView;
     }

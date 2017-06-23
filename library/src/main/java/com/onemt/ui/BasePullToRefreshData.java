@@ -11,7 +11,7 @@ import com.onemt.ui.view.SuperRefreshView;
  * @author chenyongkang
  * @Date 2017/5/27 15:18
  */
-class BasePullToRefreshData {
+public class BasePullToRefreshData {
 
     /**
      * Wrapper animation drawable or wrapper a common drawable
@@ -23,29 +23,29 @@ class BasePullToRefreshData {
     /**
      * record the position where the animation start
      */
-    int mFrom;
+    int from;
 
     /**
      * record the percent which is current drag
      */
-    float mFromDragPercent;
+    float fromDragPercent;
 
     /**
      * Whether is notify the {@link PullToRefreshView.OnRefreshListener} to refreshing
      */
-    boolean mNotify;
+    boolean isNotify;
 
     /**
      * set current refresh view is enable to refresh
      */
-    boolean mEnableToRefresh;
+    boolean enableToRefresh;
 
     /**
      * Whether the view is refreshing
      * true is refreshing
      * false is not refreshing
      */
-    boolean mIsRefreshing;
+    boolean isRefreshing;
 
     PullToRefreshView.OnRefreshListener mOnRefreshListener;
 
@@ -58,11 +58,11 @@ class BasePullToRefreshData {
     }
 
     public boolean isRefreshing() {
-        return mIsRefreshing;
+        return isRefreshing;
     }
 
     public void setIsRefreshing(boolean isRrefreshing) {
-        this.mIsRefreshing = isRrefreshing;
+        this.isRefreshing = isRrefreshing;
     }
 
     public void setOnRefreshListener(PullToRefreshView.OnRefreshListener onRefreshListener) {

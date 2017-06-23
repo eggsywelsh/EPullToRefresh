@@ -10,7 +10,7 @@ import android.widget.ImageView;
  * @author chenyongkang
  * @Date 2017/5/27 17:05
  */
-final class Target {
+public final class Target {
 
     private static final String TAG = PullToRefreshView.TAG;
 
