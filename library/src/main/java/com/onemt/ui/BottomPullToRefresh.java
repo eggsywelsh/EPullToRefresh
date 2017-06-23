@@ -97,7 +97,7 @@ public final class BottomPullToRefresh extends BasePullToRefreshData implements 
     @Override
     public void animateOffsetToStartPosition() {
         from = mTarget.getCurrentOffsetBottom();
-        fromDragPercent = mTarget.getCurrentDragPercent();
+        fromDragPercent = mTarget.getCurrentTopDragPercent();
         long animationDuration = Math.abs((long) (MAX_OFFSET_ANIMATION_DURATION * fromDragPercent));
 
         mAnimateToStartPosition.reset();
@@ -111,7 +111,7 @@ public final class BottomPullToRefresh extends BasePullToRefreshData implements 
     @Override
     public void animateOffsetToCorrectPosition() {
         from = mTarget.getCurrentOffsetBottom();
-        fromDragPercent = mTarget.getCurrentDragPercent();
+        fromDragPercent = mTarget.getCurrentTopDragPercent();
 
         mAnimateToCorrectPosition.reset();
         mAnimateToCorrectPosition.setDuration(MAX_OFFSET_ANIMATION_DURATION);
@@ -142,8 +142,8 @@ public final class BottomPullToRefresh extends BasePullToRefreshData implements 
             targetBottom = (from + (int) ((endTarget - from) * interpolatedTime));
             int offset = targetBottom - mTarget.getTargetViewBottom();
 
-            mTarget.setCurrentDragPercent(fromDragPercent - (1.0f + fromDragPercent) * interpolatedTime);
-            mRefreshView.setPercent(mTarget.getCurrentDragPercent(), false);
+            mTarget.setCurrentTopDragPercent(fromDragPercent - (1.0f + fromDragPercent) * interpolatedTime);
+            mRefreshView.setPercent(mTarget.getCurrentTopDragPercent(), false);
 
             offsetTopAndBottom(offset, false);
         }
@@ -154,8 +154,8 @@ public final class BottomPullToRefresh extends BasePullToRefreshData implements 
         float targetPercent = fromDragPercent * (1.0f - interpolatedTime);
         int offset = targetBottom - mTarget.getCurrentOffsetBottom();
 
-        mTarget.setCurrentDragPercent(targetPercent);
-        mRefreshView.setPercent(mTarget.getCurrentDragPercent(), true);
+        mTarget.setCurrentTopDragPercent(targetPercent);
+        mRefreshView.setPercent(mTarget.getCurrentTopDragPercent(), true);
 
 //        mTarget.moveToStart(targetBottom);
 
@@ -165,6 +165,7 @@ public final class BottomPullToRefresh extends BasePullToRefreshData implements 
     private Animation.AnimationListener mToStartListener = new Animation.AnimationListener() {
         @Override
         public void onAnimationStart(Animation animation) {
+//            mTarget.setAnimateFinished(false);
         }
 
         @Override
@@ -175,6 +176,7 @@ public final class BottomPullToRefresh extends BasePullToRefreshData implements 
         public void onAnimationEnd(Animation animation) {
             mRefreshView.stop();
 //            mTarget.updateCurrentOffSetTop();
+//            mTarget.setAnimateFinished(true);
         }
     };
 

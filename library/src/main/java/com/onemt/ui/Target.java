@@ -27,7 +27,10 @@ public final class Target {
     private int mTotalTopDragDistance;
     private int mTotalBottomDragDistance;
 
-    private float mCurrentDragPercent;
+    private float mCurrentTopDragPercent;
+    private float mCurrentBottomDragPercent;
+
+//    private boolean isAnimateFinished = true;
 
     /**
      * the real scroll mTargetView view or view group,beside header and tail
@@ -140,11 +143,27 @@ public final class Target {
         updatePadding(mTargetPaddingLeft, mTargetPaddingTop, mTargetPaddingRight, mTargetPaddingBottom + targetTop);
     }
 
-    public float getCurrentDragPercent() {
-        return mCurrentDragPercent;
+    public float getCurrentTopDragPercent() {
+        return mCurrentTopDragPercent;
     }
 
-    public void setCurrentDragPercent(float mCurrentDragPercent) {
-        this.mCurrentDragPercent = mCurrentDragPercent;
+    public void setCurrentTopDragPercent(float mCurrentDragPercent) {
+        this.mCurrentTopDragPercent = mCurrentDragPercent;
     }
+
+    public float getCurrentBottomDragPercent() {
+        return mCurrentBottomDragPercent;
+    }
+
+    public void setCurrentBottomDragPercent(float mCurrentBottomDragPercent) {
+        this.mCurrentBottomDragPercent = mCurrentBottomDragPercent;
+    }
+
+//    public boolean isAnimateFinished() {
+//        return isAnimateFinished;
+//    }
+//
+//    public void setAnimateFinished(boolean animateFinished) {
+//        isAnimateFinished = animateFinished;
+//    }
 }
