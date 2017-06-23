@@ -1,4 +1,4 @@
-package com.onemt.ui.refresh_view;
+package com.onemt.ui.view;
 
 import android.animation.ValueAnimator;
 import android.content.Context;

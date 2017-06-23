@@ -1,6 +1,6 @@
 package com.onemt.ui;
 
-import com.onemt.ui.refresh_view.SuperRefreshView;
+import com.onemt.ui.view.SuperRefreshView;
 
 /**
  * base pull to refresh interface

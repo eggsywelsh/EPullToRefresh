@@ -13,10 +13,10 @@ import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 
-import com.onemt.ui.refresh_view.LightRefreshView;
-import com.onemt.ui.refresh_view.MoreRefreshView;
-import com.onemt.ui.refresh_view.SuperRefreshView;
 import com.onemt.ui.util.Utils;
+import com.onemt.ui.view.LightRefreshView;
+import com.onemt.ui.view.MoreRefreshView;
+import com.onemt.ui.view.SuperRefreshView;
 
 public class PullToRefreshView extends ViewGroup {
 
@@ -94,11 +94,7 @@ public class PullToRefreshView extends ViewGroup {
 
         if (mIsPullTopToRefresh) {
             mCompTopToRefresh = new TopPullToRefresh(context, this, mTarget);
-//            setTopRefreshView(new SunRefreshView(context, this));
             setTopRefreshView(new LightRefreshView(context, this,mCompTopToRefresh.getContainerView()));
-//            MoreRefreshView moreRefreshView = new MoreRefreshView(context, mCompTopToRefresh.getContainerView(),
-//                    (AnimationDrawable) context.getResources().getDrawable(R.drawable.list_bottom_load_more));
-//            setTopRefreshView(moreRefreshView);
             addView(mCompTopToRefresh.getContainerView());
         }
 
@@ -107,7 +103,6 @@ public class PullToRefreshView extends ViewGroup {
             MoreRefreshView moreRefreshView = new MoreRefreshView(context, mCompTopToRefresh.getContainerView(),
                     (AnimationDrawable) context.getResources().getDrawable(R.drawable.list_bottom_load_more));
             setBottomRefreshView(moreRefreshView);
-//            setBottomRefreshView(new SunRefreshView(context, this, mCompTopToRefresh.getContainerView()));
             addView(mCompBottomToRefresh.getContainerView(), getChildCount());
         }
 

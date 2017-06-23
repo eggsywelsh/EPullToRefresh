@@ -41,6 +41,8 @@ public class RecyclerViewFragment extends BaseRefreshFragment {
             }
         });
 
+//        mPullToRefreshView.setTopRefreshView(new LightRefreshView(getActivity(), this,mCompTopToRefresh.getContainerView()));
+
         return rootView;
     }
 

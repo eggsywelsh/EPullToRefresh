@@ -3,7 +3,7 @@ package com.onemt.ui;
 import android.content.Context;
 import android.widget.ImageView;
 
-import com.onemt.ui.refresh_view.SuperRefreshView;
+import com.onemt.ui.view.SuperRefreshView;
 
 /**
  * Pull to refresh's data

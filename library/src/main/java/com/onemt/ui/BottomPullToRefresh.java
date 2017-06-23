@@ -7,7 +7,7 @@ import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Transformation;
 
-import com.onemt.ui.refresh_view.SuperRefreshView;
+import com.onemt.ui.view.SuperRefreshView;
 
 import static com.onemt.ui.PullToRefreshView.MAX_OFFSET_ANIMATION_DURATION;
 
