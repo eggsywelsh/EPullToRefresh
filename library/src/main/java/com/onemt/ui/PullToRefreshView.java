@@ -65,16 +65,16 @@ public class PullToRefreshView extends ViewGroup {
         super(context, attrs);
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.PullToRefreshView);
 
-        mIsPullTopToRefresh = a.getBoolean(R.styleable.PullToRefreshView_isPullTopToRefresh, false);
-        mIsPullBottomToRefresh = a.getBoolean(R.styleable.PullToRefreshView_isPullBottomToRefresh, false);
+        mIsPullTopToRefresh = a.getBoolean(R.styleable.PullToRefreshView_enableTopToRefresh, false);
+        mIsPullBottomToRefresh = a.getBoolean(R.styleable.PullToRefreshView_enableBottomToRefresh, false);
 
         mTotalTopDragDistance = a.getDimensionPixelSize(R.styleable.PullToRefreshView_topDragDistance,
                 Utils.convertDpToPixel(context, TopPullToRefresh.DRAG_MAX_DISTANCE));
         mTotalBottomDragDistance = a.getDimensionPixelSize(R.styleable.PullToRefreshView_bottomDragDistance,
                 Utils.convertDpToPixel(context, BottomPullToRefresh.DRAG_MAX_DISTANCE));
 
-        mPullTopElastic = a.getBoolean(R.styleable.PullToRefreshView_pullTopElastic, false);
-        mPullBottomElastic = a.getBoolean(R.styleable.PullToRefreshView_pullBottomElastic, false);
+        mPullTopElastic = a.getBoolean(R.styleable.PullToRefreshView_enableTopElastic, false);
+        mPullBottomElastic = a.getBoolean(R.styleable.PullToRefreshView_enableBottomElastic, false);
 
         mTopRefreshHeight = a.getDimensionPixelSize(R.styleable.PullToRefreshView_topRefreshHeight,
                 Utils.convertDpToPixel(context, TopPullToRefresh.DRAG_MAX_DISTANCE));

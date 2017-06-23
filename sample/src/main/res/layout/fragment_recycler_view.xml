@@ -7,8 +7,10 @@
         android:id="@+id/pull_to_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        refreshView:isPullBottomToRefresh="true"
-        refreshView:isPullTopToRefresh="true"
+        refreshView:enableBottomToRefresh="true"
+        refreshView:enableTopToRefresh="true"
+        refreshView:enableTopElastic="false"
+        refreshView:enableBottomElastic="false"
         android:background="@android:color/white"
         >
 

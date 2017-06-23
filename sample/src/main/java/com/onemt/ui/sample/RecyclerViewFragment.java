@@ -46,7 +46,7 @@ public class RecyclerViewFragment extends BaseRefreshFragment {
                     @Override
                     public void run() {
                         mPullToRefreshView.setTopRefreshing(false);
-                        mPullToRefreshView.enableTop(false);
+//                        mPullToRefreshView.enableTop(false);
                     }
                 }, REFRESH_DELAY);
             }
@@ -59,7 +59,7 @@ public class RecyclerViewFragment extends BaseRefreshFragment {
                     @Override
                     public void run() {
                         mPullToRefreshView.setBottomRefreshing(false);
-                        mPullToRefreshView.enableTop(true);
+//                        mPullToRefreshView.enableTop(true);
                     }
                 }, REFRESH_DELAY);
             }
