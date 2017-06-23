@@ -1,4 +1,4 @@
-package com.onemt.ui.view;
+package com.onemt.ui.sample.view;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
@@ -21,6 +21,7 @@ import android.widget.ImageView;
 
 import com.onemt.ui.PullToRefreshView;
 import com.onemt.ui.R;
+import com.onemt.ui.view.BaseDrawableRefreshView;
 
 /**
  * @author chenyongkang
@@ -98,11 +99,9 @@ public class LightRefreshView extends BaseDrawableRefreshView implements Animata
     }
 
     @Override
-    public void setContainerView(ImageView containerView) {
-        super.setContainerView(containerView);
-        mContainerView.setBackground(mContext.getResources().getDrawable(R.drawable.moon_header_bg));
-
-        mContainerView.setScaleType(ImageView.ScaleType.FIT_XY);
+    public void initContainerView(ImageView containerView) {
+        containerView.setBackground(mContext.getResources().getDrawable(R.drawable.moon_header_bg));
+        containerView.setScaleType(ImageView.ScaleType.FIT_XY);
     }
 
     private void createBitmaps() {

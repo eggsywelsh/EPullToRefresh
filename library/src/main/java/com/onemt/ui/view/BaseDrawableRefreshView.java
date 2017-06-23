@@ -32,7 +32,10 @@ public abstract class BaseDrawableRefreshView extends Drawable implements Drawab
     @Override
     public void setContainerView(ImageView containerView) {
         this.mContainerView = containerView;
+        initContainerView(containerView);
     }
+
+    public abstract void initContainerView(ImageView containerView);
 
     @Override
     public void invalidateDrawable(@NonNull Drawable who) {

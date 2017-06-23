@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.onemt.ui.PullToRefreshView;
-import com.onemt.ui.view.LightRefreshView;
-import com.onemt.ui.view.MoreRefreshView;
+import com.onemt.ui.sample.view.LightRefreshView;
+import com.onemt.ui.sample.view.MoreRefreshView;
 
 import java.util.Map;
 

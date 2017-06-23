@@ -1,4 +1,4 @@
-package com.onemt.ui.view;
+package com.onemt.ui.sample.view;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -12,10 +12,12 @@ import android.view.animation.Animation;
 import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.Transformation;
+import android.widget.ImageView;
 
 import com.onemt.ui.PullToRefreshView;
 import com.onemt.ui.R;
 import com.onemt.ui.util.Utils;
+import com.onemt.ui.view.BaseDrawableRefreshView;
 
 /**
  * Created by chen
@@ -308,5 +310,10 @@ public class SunRefreshView extends BaseDrawableRefreshView implements Animatabl
     @Override
     public Drawable obtainRefreshDrawable() {
         return this;
+    }
+
+    @Override
+    public void initContainerView(ImageView containerView) {
+
     }
 }
