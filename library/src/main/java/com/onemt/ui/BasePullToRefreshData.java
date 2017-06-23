@@ -38,7 +38,7 @@ public class BasePullToRefreshData {
     /**
      * set current refresh view is enable to refresh
      */
-    boolean enableToRefresh;
+    private boolean enableRefresh = true;
 
     /**
      * Whether the view is refreshing
@@ -67,5 +67,13 @@ public class BasePullToRefreshData {
 
     public void setOnRefreshListener(PullToRefreshView.OnRefreshListener onRefreshListener) {
         this.mOnRefreshListener = onRefreshListener;
+    }
+
+    public boolean isEnableRefresh() {
+        return enableRefresh;
+    }
+
+    public void setEnableRefresh(boolean enableRefresh) {
+        this.enableRefresh = enableRefresh;
     }
 }

@@ -47,9 +47,9 @@ public class PullToRefreshView extends ViewGroup {
     /**
      * ====== view attr ======
      */
-    // set has pull top to refresh
+    // set is enable top to refresh view
     private boolean mIsPullTopToRefresh;
-    // set has pull bottom to refresh
+    // set is enable bottom to refresh view
     private boolean mIsPullBottomToRefresh;
 
     TopPullToRefresh mCompTopToRefresh;
@@ -185,7 +185,7 @@ public class PullToRefreshView extends ViewGroup {
         int height = getMeasuredHeight();
         int width = getMeasuredWidth();
         if (mCompTopToRefresh != null) {
-            mCompTopToRefresh.updateRefreshViewLayout(left, top, left + width - right, (top + height - bottom)/2);
+            mCompTopToRefresh.updateRefreshViewLayout(left, top, left + width - right, (top + height - bottom) / 2);
         }
 
         if (mCompBottomToRefresh != null) {
@@ -199,10 +199,10 @@ public class PullToRefreshView extends ViewGroup {
         if (!isEnabled()
                 || (!mIsPullTopToRefresh && mActivePointerId != INVALID_POINTER && ev.getAction() == MotionEvent.ACTION_MOVE && getMotionEventY(ev, mActivePointerId) - mInitialMotionY > 0)
                 || (!mIsPullBottomToRefresh && mActivePointerId != INVALID_POINTER && ev.getAction() == MotionEvent.ACTION_MOVE && getMotionEventY(ev, mActivePointerId) - mInitialMotionY < 0)
-                || (mActivePointerId != INVALID_POINTER && ev.getAction() == MotionEvent.ACTION_MOVE && getMotionEventY(ev, mActivePointerId) - mInitialMotionY > 0 && canChildScrollUp())
-                || (mActivePointerId != INVALID_POINTER && ev.getAction() == MotionEvent.ACTION_MOVE && getMotionEventY(ev, mActivePointerId) - mInitialMotionY < 0 && canChildScrollDown())
+                || (mActivePointerId != INVALID_POINTER && ev.getAction() == MotionEvent.ACTION_MOVE && getMotionEventY(ev, mActivePointerId) - mInitialMotionY > 0 && (canChildScrollUp() || !mCompTopToRefresh.isEnableRefresh()))
+                || (mActivePointerId != INVALID_POINTER && ev.getAction() == MotionEvent.ACTION_MOVE && getMotionEventY(ev, mActivePointerId) - mInitialMotionY < 0 && (canChildScrollDown() || !mCompBottomToRefresh.isEnableRefresh()))
                 || (mCompTopToRefresh != null && mCompTopToRefresh.isRefreshing())
-                || (mCompBottomToRefresh != null && mCompBottomToRefresh.isRefreshing())
+                || (mCompBottomToRefresh != null && (mCompBottomToRefresh.isRefreshing() || !mCompBottomToRefresh.isEnableRefresh()))
                 ) {
             return false;
         }
@@ -239,6 +239,7 @@ public class PullToRefreshView extends ViewGroup {
                     return false;
                 }
                 final float yDiff = y - mInitialMotionY;
+                Log.d(TAG, "onInterceptTouchEvent[ACTION_MOVE] yDiff " + yDiff);
                 if (yDiff > mTouchSlop && !mIsBeingDownDragged) {
                     mIsBeingDownDragged = true;
                 } else if (yDiff < 0 && Math.abs(yDiff) > mTouchSlop && !mIsBeingUpDragged) {
@@ -474,16 +475,34 @@ public class PullToRefreshView extends ViewGroup {
         }
     }
 
-    public int getTargetOffsetTop(){
+    public int getTargetOffsetTop() {
         return mTarget.getCurrentOffsetTop();
     }
 
-    public int getTargetOffsetBottom(){
+    public int getTargetOffsetBottom() {
         return mTarget.getCurrentOffsetBottom();
     }
 
     public interface OnRefreshListener {
         void onRefresh();
+    }
+
+    /**
+     * set bottom refresh is enable
+     *
+     * @param isEnable true enable,false disable
+     */
+    public void enableBottom(boolean isEnable) {
+        mCompBottomToRefresh.setEnableRefresh(isEnable);
+    }
+
+    /**
+     * set bottom refresh is enable
+     *
+     * @param isEnable true enable,false disable
+     */
+    public void enableTop(boolean isEnable) {
+        mCompTopToRefresh.setEnableRefresh(isEnable);
     }
 
 }
