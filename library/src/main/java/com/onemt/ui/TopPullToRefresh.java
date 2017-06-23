@@ -39,7 +39,7 @@ final class TopPullToRefresh extends BasePullToRefreshData implements BasePullTo
 
     @Override
     public void setRefreshView(SuperRefreshView refreshView) {
-        mRefreshViewAnimate = refreshView;
+        mRefreshView = refreshView;
         if (refreshView != null) {
             mContainerView.setImageDrawable(refreshView.obtainRefreshDrawable());
         }
@@ -47,7 +47,7 @@ final class TopPullToRefresh extends BasePullToRefreshData implements BasePullTo
 
     @Override
     public boolean hasRefreshView() {
-        return mRefreshViewAnimate != null;
+        return mRefreshView != null;
     }
 
     @Override
@@ -76,7 +76,7 @@ final class TopPullToRefresh extends BasePullToRefreshData implements BasePullTo
 
     @Override
     public void setRefreshViewPercent(float percent, boolean invalidate) {
-        mRefreshViewAnimate.setPercent(percent, invalidate);
+        mRefreshView.setPercent(percent, invalidate);
     }
 
     @Override
@@ -86,7 +86,7 @@ final class TopPullToRefresh extends BasePullToRefreshData implements BasePullTo
             mTarget.ensureTarget();
             super.mIsRefreshing = refreshing;
             if (mIsRefreshing) {
-                mRefreshViewAnimate.setPercent(1f, true);
+                mRefreshView.setPercent(1f, true);
                 animateOffsetToCorrectPosition();
             } else {
                 animateOffsetToStartPosition();
@@ -120,14 +120,14 @@ final class TopPullToRefresh extends BasePullToRefreshData implements BasePullTo
         mContainerView.startAnimation(mAnimateToCorrectPosition);
 
         if (mIsRefreshing) {
-            mRefreshViewAnimate.start();
+            mRefreshView.start();
             if (mNotify) {
                 if (mOnRefreshListener != null) {
                     mOnRefreshListener.onRefresh();
                 }
             }
         } else {
-            mRefreshViewAnimate.stop();
+            mRefreshView.stop();
             animateOffsetToStartPosition();
         }
         mTarget.updatePaddingAndOffset();
@@ -142,7 +142,7 @@ final class TopPullToRefresh extends BasePullToRefreshData implements BasePullTo
             int offset = targetTop - mTarget.getTargetViewTop();
 
             mTarget.setCurrentDragPercent(mFromDragPercent - (mFromDragPercent - 1.0f) * interpolatedTime);
-            mRefreshViewAnimate.setPercent(mTarget.getCurrentDragPercent(), false);
+            mRefreshView.setPercent(mTarget.getCurrentDragPercent(), false);
 
             offsetTopAndBottom(offset, false);
         }
@@ -161,7 +161,7 @@ final class TopPullToRefresh extends BasePullToRefreshData implements BasePullTo
         int offset = targetTop - mTarget.getTargetViewTop();
 
         mTarget.setCurrentDragPercent(targetPercent);
-        mRefreshViewAnimate.setPercent(mTarget.getCurrentDragPercent(), true);
+        mRefreshView.setPercent(mTarget.getCurrentDragPercent(), true);
 
         mTarget.moveToStart(targetTop);
 
@@ -179,14 +179,14 @@ final class TopPullToRefresh extends BasePullToRefreshData implements BasePullTo
 
         @Override
         public void onAnimationEnd(Animation animation) {
-            mRefreshViewAnimate.stop();
+            mRefreshView.stop();
             mTarget.updateCurrentOffSetTop();
         }
     };
 
     public void offsetTopAndBottom(int offset, boolean requiresUpdate) {
         mTarget.offsetTopAndBottom(offset);
-        mRefreshViewAnimate.offsetTopAndBottom(offset);
+        mRefreshView.offsetTopAndBottom(offset);
         mTarget.updateCurrentOffSetTop();
         if (requiresUpdate && android.os.Build.VERSION.SDK_INT < 11) {
             mParent.invalidate();
@@ -195,15 +195,6 @@ final class TopPullToRefresh extends BasePullToRefreshData implements BasePullTo
 
     @Override
     public void updateRefreshViewLayout(int left, int top, int right, int bottom) {
-        /*
-        int height = 0;
-        int width = 0;
-        if (mParent != null) {
-            height = mParent.getMeasuredHeight();
-            width = mParent.getMeasuredWidth();
-        }
-        mContainerView.layout(left, top, left + width - right, top + height - bottom);
-        */
         mContainerView.layout(left, top, right, bottom);
     }
 

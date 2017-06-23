@@ -42,7 +42,7 @@ final class BottomPullToRefresh extends BasePullToRefreshData implements BasePul
 
     @Override
     public void setRefreshView(SuperRefreshView refreshView) {
-        mRefreshViewAnimate = refreshView;
+        mRefreshView = refreshView;
 //        if (refreshView != null) {
 //            mContainerView.setImageDrawable(refreshView.obtainRefreshDrawable());
 //            mContainerView.getDrawable()
@@ -51,7 +51,7 @@ final class BottomPullToRefresh extends BasePullToRefreshData implements BasePul
 
     @Override
     public boolean hasRefreshView() {
-        return mRefreshViewAnimate != null;
+        return mRefreshView != null;
     }
 
     @Override
@@ -80,7 +80,7 @@ final class BottomPullToRefresh extends BasePullToRefreshData implements BasePul
 
     @Override
     public void setRefreshViewPercent(float percent, boolean invalidate) {
-        mRefreshViewAnimate.setPercent(percent, invalidate);
+        mRefreshView.setPercent(percent, invalidate);
     }
 
     @Override
@@ -90,7 +90,7 @@ final class BottomPullToRefresh extends BasePullToRefreshData implements BasePul
             mTarget.ensureTarget();
             super.mIsRefreshing = refreshing;
             if (mIsRefreshing) {
-                mRefreshViewAnimate.setPercent(-1f, true);
+                mRefreshView.setPercent(-1f, true);
                 animateOffsetToCorrectPosition();
             } else {
                 animateOffsetToStartPosition();
@@ -124,14 +124,14 @@ final class BottomPullToRefresh extends BasePullToRefreshData implements BasePul
         mContainerView.startAnimation(mAnimateToCorrectPosition);
 
         if (mIsRefreshing) {
-            mRefreshViewAnimate.start();
+            mRefreshView.start();
             if (mNotify) {
                 if (mOnRefreshListener != null) {
                     mOnRefreshListener.onRefresh();
                 }
             }
         } else {
-            mRefreshViewAnimate.stop();
+            mRefreshView.stop();
             animateOffsetToStartPosition();
         }
 //        mTarget.updatePaddingAndOffset();
@@ -147,7 +147,7 @@ final class BottomPullToRefresh extends BasePullToRefreshData implements BasePul
             int offset = targetBottom - mTarget.getTargetViewBottom();
 
             mTarget.setCurrentDragPercent(mFromDragPercent - (1.0f + mFromDragPercent) * interpolatedTime);
-            mRefreshViewAnimate.setPercent(mTarget.getCurrentDragPercent(), false);
+            mRefreshView.setPercent(mTarget.getCurrentDragPercent(), false);
 
             offsetTopAndBottom(offset, false);
         }
@@ -159,7 +159,7 @@ final class BottomPullToRefresh extends BasePullToRefreshData implements BasePul
         int offset = targetBottom - mTarget.getCurrentOffsetBottom();
 
         mTarget.setCurrentDragPercent(targetPercent);
-        mRefreshViewAnimate.setPercent(mTarget.getCurrentDragPercent(), true);
+        mRefreshView.setPercent(mTarget.getCurrentDragPercent(), true);
 
 //        mTarget.moveToStart(targetBottom);
 
@@ -177,7 +177,7 @@ final class BottomPullToRefresh extends BasePullToRefreshData implements BasePul
 
         @Override
         public void onAnimationEnd(Animation animation) {
-            mRefreshViewAnimate.stop();
+            mRefreshView.stop();
 //            mTarget.updateCurrentOffSetTop();
         }
     };
@@ -205,14 +205,14 @@ final class BottomPullToRefresh extends BasePullToRefreshData implements BasePul
     public void offsetTopAndBottom(int offset, boolean requiresUpdate) {
         Log.d(TAG, "offsetTopAndBottom " + offset);
         mTarget.offsetTopAndBottom(offset);
-        if (mContainerView.getDrawable() == null && mRefreshViewAnimate != null) {
-            mContainerView.setImageDrawable(mRefreshViewAnimate.obtainRefreshDrawable());
+        if (mContainerView.getDrawable() == null && mRefreshView != null) {
+            mContainerView.setImageDrawable(mRefreshView.obtainRefreshDrawable());
             mContainerView.scrollTo(0, -mTarget.getTotalBottomDragDistance());
             Log.d(TAG, "init offsetTopAndBottom");
         }
 //        Log.d(TAG, "offsetTopAndBottom " + (Math.abs(mTarget.getCurrentOffsetBottom()) - mTarget.getTotalBottomDragDistance()));
-//        mRefreshViewAnimate.offsetTopAndBottom(10);
-//         mRefreshViewAnimate.offsetTopAndBottom(Math.abs(mTarget.getCurrentOffsetBottom()) - mTarget.getTotalBottomDragDistance());
+//        mRefreshView.offsetTopAndBottom(10);
+//         mRefreshView.offsetTopAndBottom(Math.abs(mTarget.getCurrentOffsetBottom()) - mTarget.getTotalBottomDragDistance());
 //        mContainerView.scrollTo(0, offset);
         mContainerView.scrollTo(0, Math.abs(mTarget.getCurrentOffsetBottom()) - mTarget.getTotalBottomDragDistance());
         mTarget.updateCurrentOffsetBottom(offset);

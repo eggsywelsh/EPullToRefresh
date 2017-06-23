@@ -18,7 +18,7 @@ class BasePullToRefreshData {
      */
     ImageView mContainerView;
 
-    SuperRefreshView mRefreshViewAnimate;
+    SuperRefreshView mRefreshView;
 
     /**
      * record the position where the animation start
