@@ -23,7 +23,7 @@ public final class BottomPullToRefresh extends BasePullToRefreshData implements 
 
     private static final float DECELERATE_INTERPOLATION_FACTOR = 2f;
 
-    static final int DRAG_MAX_DISTANCE = 200;
+    static final int DRAG_MAX_DISTANCE = 30;
 
     DecelerateInterpolator mDecelerateInterpolator = new DecelerateInterpolator(DECELERATE_INTERPOLATION_FACTOR);
 

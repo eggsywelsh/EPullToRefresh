@@ -29,6 +29,7 @@ public class RecyclerViewFragment extends BaseRefreshFragment {
         recyclerView.setAdapter(new SampleAdapter());
 
         mPullToRefreshView = (PullToRefreshView) rootView.findViewById(R.id.pull_to_refresh);
+
         mPullToRefreshView.setOnTopRefreshListener(new PullToRefreshView.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -36,6 +37,18 @@ public class RecyclerViewFragment extends BaseRefreshFragment {
                     @Override
                     public void run() {
                         mPullToRefreshView.setTopRefreshing(false);
+                    }
+                }, REFRESH_DELAY);
+            }
+        });
+
+        mPullToRefreshView.setOnBottomRefreshListener(new PullToRefreshView.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mPullToRefreshView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mPullToRefreshView.setBottomRefreshing(false);
                     }
                 }, REFRESH_DELAY);
             }
@@ -89,4 +102,15 @@ public class RecyclerViewFragment extends BaseRefreshFragment {
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        /*mPullToRefreshView.setTopRefreshing(true);
+        mPullToRefreshView.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mPullToRefreshView.setTopRefreshing(false);
+            }
+        }, REFRESH_DELAY);*/
+    }
 }
