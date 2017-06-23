@@ -20,24 +20,29 @@ public class BaseRefreshFragment extends Fragment {
 
     protected List<Map<String, Integer>> mSampleList;
 
+    int[] icons = {
+            R.drawable.icon_1
+            ,R.drawable.icon_2
+            ,R.drawable.icon_3
+    };
+
+    int[] colors = {
+            R.color.saffron
+            , R.color.eggplant
+            , R.color.sienna
+    };
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Map<String, Integer> map;
         mSampleList = new ArrayList<>();
 
-        int[] icons = {
-                R.drawable.icon_1
-                ,R.drawable.icon_2
-                ,R.drawable.icon_3
-        };
+        addData();
+    }
 
-        int[] colors = {
-                R.color.saffron
-                , R.color.eggplant
-                , R.color.sienna
-        };
+    private void addData(){
+        Map<String, Integer> map;
 
         for (int i = 0; i < icons.length; i++) {
             map = new HashMap<>();

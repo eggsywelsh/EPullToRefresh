@@ -22,11 +22,13 @@ public class RecyclerViewFragment extends BaseRefreshFragment {
 
     private PullToRefreshView mPullToRefreshView;
 
+    private RecyclerView recyclerView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_recycler_view, container, false);
 
-        RecyclerView recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         recyclerView.setAdapter(new SampleAdapter());
@@ -46,7 +48,6 @@ public class RecyclerViewFragment extends BaseRefreshFragment {
                     @Override
                     public void run() {
                         mPullToRefreshView.setTopRefreshing(false);
-//                        mPullToRefreshView.enableTop(false);
                     }
                 }, REFRESH_DELAY);
             }
@@ -59,7 +60,6 @@ public class RecyclerViewFragment extends BaseRefreshFragment {
                     @Override
                     public void run() {
                         mPullToRefreshView.setBottomRefreshing(false);
-//                        mPullToRefreshView.enableTop(true);
                     }
                 }, REFRESH_DELAY);
             }
