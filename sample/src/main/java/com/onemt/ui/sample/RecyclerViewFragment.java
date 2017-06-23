@@ -1,5 +1,6 @@
 package com.onemt.ui.sample;
 
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.onemt.ui.PullToRefreshView;
+import com.onemt.ui.view.LightRefreshView;
+import com.onemt.ui.view.MoreRefreshView;
 
 import java.util.Map;
 
@@ -29,6 +32,12 @@ public class RecyclerViewFragment extends BaseRefreshFragment {
         recyclerView.setAdapter(new SampleAdapter());
 
         mPullToRefreshView = (PullToRefreshView) rootView.findViewById(R.id.pull_to_refresh);
+
+        mPullToRefreshView.setTopRefreshView(new LightRefreshView(getActivity(), mPullToRefreshView));
+
+        MoreRefreshView moreRefreshView = new MoreRefreshView(getActivity(),
+                            (AnimationDrawable) getResources().getDrawable(R.drawable.list_bottom_load_more));
+        mPullToRefreshView.setBottomRefreshView(moreRefreshView);
 
         mPullToRefreshView.setOnTopRefreshListener(new PullToRefreshView.OnRefreshListener() {
             @Override
@@ -53,8 +62,6 @@ public class RecyclerViewFragment extends BaseRefreshFragment {
                 }, REFRESH_DELAY);
             }
         });
-
-//        mPullToRefreshView.setTopRefreshView(new LightRefreshView(getActivity(), this,mCompTopToRefresh.getContainerView()));
 
         return rootView;
     }

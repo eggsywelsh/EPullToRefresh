@@ -2,7 +2,6 @@ package com.onemt.ui;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.drawable.AnimationDrawable;
 import android.support.annotation.NonNull;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v4.view.ViewCompat;
@@ -14,8 +13,6 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 
 import com.onemt.ui.util.Utils;
-import com.onemt.ui.view.LightRefreshView;
-import com.onemt.ui.view.MoreRefreshView;
 import com.onemt.ui.view.SuperRefreshView;
 
 public class PullToRefreshView extends ViewGroup {
@@ -94,15 +91,15 @@ public class PullToRefreshView extends ViewGroup {
 
         if (mIsPullTopToRefresh) {
             mCompTopToRefresh = new TopPullToRefresh(context, this, mTarget);
-            setTopRefreshView(new LightRefreshView(context, this));
+//            setTopRefreshView(new LightRefreshView(context, this));
             addView(mCompTopToRefresh.getContainerView());
         }
 
         if (mIsPullBottomToRefresh) {
             mCompBottomToRefresh = new BottomPullToRefresh(context, this, mTarget);
-            MoreRefreshView moreRefreshView = new MoreRefreshView(context,
-                    (AnimationDrawable) context.getResources().getDrawable(R.drawable.list_bottom_load_more));
-            setBottomRefreshView(moreRefreshView);
+//            MoreRefreshView moreRefreshView = new MoreRefreshView(context,
+//                    (AnimationDrawable) context.getResources().getDrawable(R.drawable.list_bottom_load_more));
+//            setBottomRefreshView(moreRefreshView);
             addView(mCompBottomToRefresh.getContainerView(), getChildCount());
         }
 
@@ -192,9 +189,7 @@ public class PullToRefreshView extends ViewGroup {
         }
 
         if (mCompBottomToRefresh != null) {
-//            mCompBottomToRefresh.updateRefreshViewLayout(left, top, left + width - right, (top + height - bottom));
             mCompBottomToRefresh.updateRefreshViewLayout(left, (top + height - bottom) - mTotalBottomDragDistance, left + width - right, (top + height - bottom));
-//            mCompBottomToRefresh.updateRefreshViewLayout(left, (top + height - bottom) , left + width - right, (top + height - bottom)+100);
         }
     }
 
