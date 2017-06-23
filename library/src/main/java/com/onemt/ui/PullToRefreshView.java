@@ -27,6 +27,10 @@ public class PullToRefreshView extends ViewGroup {
     private static final int INVALID_POINTER = -1;
 
     private int mTouchSlop;
+
+    private int mMaxTopDragDistance;
+//    private int mMaxBottomDragDistance;
+
     private int mTotalTopDragDistance;
     private int mTotalBottomDragDistance;
 
@@ -73,6 +77,11 @@ public class PullToRefreshView extends ViewGroup {
         mTotalBottomDragDistance = a.getDimensionPixelSize(R.styleable.PullToRefreshView_bottomDragDistance,
                 Utils.convertDpToPixel(context, BottomPullToRefresh.DRAG_MAX_DISTANCE));
 
+        mMaxTopDragDistance = a.getDimensionPixelSize(R.styleable.PullToRefreshView_maxTopDragDistance,
+                Utils.convertDpToPixel(context, TopPullToRefresh.DRAG_MAX_DISTANCE));
+//        mMaxBottomDragDistance = a.getDimensionPixelSize(R.styleable.PullToRefreshView_maxBottomDragDistance,
+//                Utils.convertDpToPixel(context, BottomPullToRefresh.DRAG_MAX_DISTANCE));
+
         mPullTopElastic = a.getBoolean(R.styleable.PullToRefreshView_enableTopElastic, false);
         mPullBottomElastic = a.getBoolean(R.styleable.PullToRefreshView_enableBottomElastic, false);
 
@@ -82,6 +91,10 @@ public class PullToRefreshView extends ViewGroup {
                 Utils.convertDpToPixel(context, BottomPullToRefresh.DRAG_MAX_DISTANCE));
 
         a.recycle();
+
+        if(mMaxTopDragDistance < mTotalTopDragDistance){
+            mMaxTopDragDistance = mTotalTopDragDistance;
+        }
 
         mTarget = new Target(this);
         mTarget.setTotalTopDragDistance(mTotalTopDragDistance);
@@ -296,6 +309,8 @@ public class PullToRefreshView extends ViewGroup {
 
                     float slingshotDist = mTarget.getTotalTopDragDistance();
 
+                    int targetY;
+
                     if (mPullTopElastic) {
                         float extraOS = Math.abs(scrollTop) - mTarget.getTotalTopDragDistance();
 
@@ -306,9 +321,14 @@ public class PullToRefreshView extends ViewGroup {
                                 (tensionSlingshotPercent / 4), 2)) * 2f;
 
                         extraMove = (slingshotDist) * tensionPercent / 2;
-                    }
 
-                    int targetY = (int) ((slingshotDist * boundedDragPercent) + extraMove);
+                        targetY = (int) ((slingshotDist * boundedDragPercent) + extraMove);
+                    } else {
+                        targetY = (int)scrollTop;
+                        if(targetY >= mMaxTopDragDistance){
+                            targetY = mMaxTopDragDistance;
+                        }
+                    }
 
                     Log.d(TAG, "targetY " + targetY + " , mTarget.getCurrentOffsetTop() " + mTarget.getCurrentOffsetTop());
                     mCompTopToRefresh.setRefreshViewPercent(mTarget.getCurrentDragPercent(), true);
@@ -331,6 +351,8 @@ public class PullToRefreshView extends ViewGroup {
 
                     float slingshotDist = mTarget.getTotalBottomDragDistance();
 
+                    int targetY;
+
                     if (mPullBottomElastic) {
                         float extraOS = scrollBottom - mTarget.getTotalBottomDragDistance();
 
@@ -341,9 +363,18 @@ public class PullToRefreshView extends ViewGroup {
                                 (tensionSlingshotPercent / 4), 2)) * 2f;
 
                         extraMove = (slingshotDist) * tensionPercent / 2;
-                    }
 
-                    int targetY = (int) ((slingshotDist * boundedDragPercent) - extraMove);
+                        targetY = (int) ((slingshotDist * boundedDragPercent) - extraMove);
+                    }else{
+                        targetY = (int) (slingshotDist * boundedDragPercent);
+
+                        /*
+                        targetY = (int)scrollBottom;
+                        if(targetY >= mMaxBottomDragDistance){
+                            targetY = mMaxBottomDragDistance;
+                        }
+                        */
+                    }
 
                     Log.d(TAG, "targetY " + targetY + " , mTarget.getCurrentOffsetBottom() " + mTarget.getCurrentOffsetBottom());
                     mCompBottomToRefresh.setRefreshViewPercent(mTarget.getCurrentDragPercent(), true);

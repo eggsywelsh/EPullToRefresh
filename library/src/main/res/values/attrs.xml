@@ -7,6 +7,8 @@
         <attr name="enableBottomElastic" format="boolean" />
         <attr name="topDragDistance" format="dimension" />
         <attr name="bottomDragDistance" format="dimension" />
+        <attr name="maxTopDragDistance" format="dimension" />
+        <attr name="maxBottomDragDistance" format="dimension" />
         <attr name="topRefreshHeight" format="dimension" />
         <attr name="bottomRefreshHeight" format="dimension" />
     </declare-styleable>
