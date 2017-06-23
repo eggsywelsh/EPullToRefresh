@@ -1,0 +1,28 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:refreshView="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.onemt.ui.PullToRefreshView
+        android:id="@+id/pull_to_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        refreshView:isPullBottomToRefresh="true"
+        refreshView:isPullTopToRefresh="true"
+        refreshView:topDragDistance="120dp"
+        refreshView:bottomDragDistance="30dp"
+        refreshView:pullTopElastic="true"
+        refreshView:pullBottomElastic="true"
+        >
+
+        <ListView
+            android:id="@+id/list_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@null"
+            android:dividerHeight="0dp"
+            android:fadingEdge="none" />
+
+    </com.onemt.ui.PullToRefreshView>
+
+</RelativeLayout>
