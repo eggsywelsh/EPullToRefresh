@@ -97,7 +97,7 @@ public final class BottomPullToRefresh extends BasePullToRefreshData implements 
     @Override
     public void animateOffsetToStartPosition() {
         from = mTarget.getCurrentOffsetBottom();
-        fromDragPercent = mTarget.getCurrentTopDragPercent();
+        fromDragPercent = mTarget.getCurrentBottomDragPercent();
         long animationDuration = Math.abs((long) (MAX_OFFSET_ANIMATION_DURATION * fromDragPercent));
 
         mAnimateToStartPosition.reset();
@@ -111,7 +111,7 @@ public final class BottomPullToRefresh extends BasePullToRefreshData implements 
     @Override
     public void animateOffsetToCorrectPosition() {
         from = mTarget.getCurrentOffsetBottom();
-        fromDragPercent = mTarget.getCurrentTopDragPercent();
+        fromDragPercent = mTarget.getCurrentBottomDragPercent();
 
         mAnimateToCorrectPosition.reset();
         mAnimateToCorrectPosition.setDuration(MAX_OFFSET_ANIMATION_DURATION);
@@ -142,8 +142,8 @@ public final class BottomPullToRefresh extends BasePullToRefreshData implements 
             targetBottom = (from + (int) ((endTarget - from) * interpolatedTime));
             int offset = targetBottom - mTarget.getTargetViewBottom();
 
-            mTarget.setCurrentTopDragPercent(fromDragPercent - (1.0f + fromDragPercent) * interpolatedTime);
-            mRefreshView.setPercent(mTarget.getCurrentTopDragPercent(), false);
+            mTarget.setCurrentBottomDragPercent(fromDragPercent - (1.0f + fromDragPercent) * interpolatedTime);
+            mRefreshView.setPercent(mTarget.getCurrentBottomDragPercent(), false);
 
             offsetTopAndBottom(offset, false);
         }
@@ -154,8 +154,8 @@ public final class BottomPullToRefresh extends BasePullToRefreshData implements 
         float targetPercent = fromDragPercent * (1.0f - interpolatedTime);
         int offset = targetBottom - mTarget.getCurrentOffsetBottom();
 
-        mTarget.setCurrentTopDragPercent(targetPercent);
-        mRefreshView.setPercent(mTarget.getCurrentTopDragPercent(), true);
+        mTarget.setCurrentBottomDragPercent(targetPercent);
+        mRefreshView.setPercent(mTarget.getCurrentBottomDragPercent(), true);
 
 //        mTarget.moveToStart(targetBottom);
 

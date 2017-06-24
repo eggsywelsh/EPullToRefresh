@@ -209,13 +209,18 @@ public class PullToRefreshView extends ViewGroup {
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
 
+        if((mCompTopToRefresh != null && mCompTopToRefresh.isRefreshing())
+                || (mCompBottomToRefresh != null && mCompBottomToRefresh.isRefreshing())){
+            return true;
+        }
+
         if (!isEnabled()
                 || (!mIsPullTopToRefresh && mActivePointerId != INVALID_POINTER && ev.getAction() == MotionEvent.ACTION_MOVE && getMotionEventY(ev, mActivePointerId) - mInitialMotionY > 0)
                 || (!mIsPullBottomToRefresh && mActivePointerId != INVALID_POINTER && ev.getAction() == MotionEvent.ACTION_MOVE && getMotionEventY(ev, mActivePointerId) - mInitialMotionY < 0)
                 || (mActivePointerId != INVALID_POINTER && ev.getAction() == MotionEvent.ACTION_MOVE && getMotionEventY(ev, mActivePointerId) - mInitialMotionY > 0 && (canChildScrollUp() || !mCompTopToRefresh.isEnableRefresh()))
                 || (mActivePointerId != INVALID_POINTER && ev.getAction() == MotionEvent.ACTION_MOVE && getMotionEventY(ev, mActivePointerId) - mInitialMotionY < 0 && (canChildScrollDown() || !mCompBottomToRefresh.isEnableRefresh()))
-                || (mCompTopToRefresh != null && mCompTopToRefresh.isRefreshing())
-                || (mCompBottomToRefresh != null && mCompBottomToRefresh.isRefreshing())
+//                || (mCompTopToRefresh != null && mCompTopToRefresh.isRefreshing())
+//                || (mCompBottomToRefresh != null && mCompBottomToRefresh.isRefreshing())
 //                || (mTarget != null && !mTarget.isAnimateFinished())
                 ) {
             return false;
@@ -340,13 +345,13 @@ public class PullToRefreshView extends ViewGroup {
                 } else if (yDiff < 0 && mCompBottomToRefresh != null && mCompBottomToRefresh.hasRefreshView()) {  // pull up
                     final float scrollBottom = yDiff * BOTTOM_DRAG_RATE;
 
-                    mTarget.setCurrentTopDragPercent(scrollBottom / mTarget.getTotalBottomDragDistance());
+                    mTarget.setCurrentBottomDragPercent(scrollBottom / mTarget.getTotalBottomDragDistance());
 
-                    if (mTarget.getCurrentTopDragPercent() > 0) {
+                    if (mTarget.getCurrentBottomDragPercent() > 0) {
                         return false;
                     }
 
-                    float boundedDragPercent = Math.max(-1f, mTarget.getCurrentTopDragPercent());
+                    float boundedDragPercent = Math.max(-1f, mTarget.getCurrentBottomDragPercent());
 
                     float extraMove = 0f;
 
@@ -378,7 +383,7 @@ public class PullToRefreshView extends ViewGroup {
                     }
 
                     Log.d(TAG, "targetY " + targetY + " , mTarget.getCurrentOffsetBottom() " + mTarget.getCurrentOffsetBottom());
-                    mCompBottomToRefresh.setRefreshViewPercent(mTarget.getCurrentTopDragPercent(), true);
+                    mCompBottomToRefresh.setRefreshViewPercent(mTarget.getCurrentBottomDragPercent(), true);
 
                     Log.d(TAG, " pull up , offset " + (targetY - mTarget.getCurrentOffsetBottom()));
                     mCompBottomToRefresh.offsetTopAndBottom(targetY - mTarget.getCurrentOffsetBottom(), true);
