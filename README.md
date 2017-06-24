@@ -1,54 +1,73 @@
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Phoenix-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/1386) [![Yalantis](https://github.com/Yalantis/Phoenix/blob/master/badge.png)](https://yalantis.com/?utm_source=github)
+# Pull-to-Refresh
 
-# Phoenix Pull-to-Refresh
-
-#### This project aims to provide a simple and customizable pull to refresh implementation. Made in [Yalantis] (https://yalantis.com/?utm_source=github)
-
-Check this [project on Dribbble] (https://dribbble.com/shots/1650317-Pull-to-Refresh-Rentals)  
-Check this [project on Behance] (https://www.behance.net/gallery/20411445/Mobile-Animations-Interactions)  
-
-<img src="https://d13yacurqjgara.cloudfront.net/users/125056/screenshots/1650317/realestate-pull_1-2-3.gif" alt="alt text" style="width:200;height:200">
+#### This project aims to provide a simple and customizable pull to refresh implementation. Made in [Eggsy] (https://github.com/eggsywelsh)
 
 #Usage
 
 *For a working implementation, Have a look at the Sample Project - sample*
 
-1. Include the library as local library project.
-
-    ``` compile 'com.yalantis:phoenix:1.2.3' ```
-
 2. Include the PullToRefreshView widget in your layout.
 
 	```xml
-    <com.yalantis.phoenix.PullToRefreshView
-        android:id="@+id/pull_to_refresh"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <ListView
-            android:id="@+id/list_view"
-            android:divider="@null"
-            android:dividerHeight="0dp"
+    <com.eggsy.ui.PullToRefreshView
+            android:id="@+id/pull_to_refresh"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            refreshView:topDragDistance="120dp"
+            refreshView:maxTopDragDistance="160dp"
+            refreshView:bottomDragDistance="30dp"
+            refreshView:maxBottomDragDistance="60dp"
+            refreshView:enableBottomToRefresh="true"
+            refreshView:enableTopToRefresh="true"
+            refreshView:enableTopElastic="false"
+            refreshView:enableBottomElastic="false"
+            android:background="@android:color/white"
+            >
 
-    </com.yalantis.phoenix.PullToRefreshView>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@null"
+                android:dividerHeight="0dp"
+                android:fadingEdge="none" />
+
+        </com.eggsy.ui.PullToRefreshView>
     ```
 
 3. In your `onCreate` method refer to the View and setup OnRefreshListener.
 	```java
-    mPullToRefreshView = (PullToRefreshView) findViewById(R.id.pull_to_refresh);
-    mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
-        @Override
-        public void onRefresh() {
-            mPullToRefreshView.postDelayed(new Runnable() {
+    mPullToRefreshView = (PullToRefreshView) rootView.findViewById(R.id.pull_to_refresh);
+
+            mPullToRefreshView.setTopRefreshView(new LightRefreshView(getActivity(), mPullToRefreshView));
+
+            MoreRefreshView moreRefreshView = new MoreRefreshView(getActivity(),
+                                (AnimationDrawable) getResources().getDrawable(R.drawable.list_bottom_load_more));
+            mPullToRefreshView.setBottomRefreshView(moreRefreshView);
+
+            mPullToRefreshView.setOnTopRefreshListener(new PullToRefreshView.OnRefreshListener() {
                 @Override
-                public void run() {
-                    mPullToRefreshView.setRefreshing(false);
+                public void onRefresh() {
+                    mPullToRefreshView.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            mPullToRefreshView.setTopRefreshing(false);
+                        }
+                    }, REFRESH_DELAY);
                 }
-            }, REFRESH_DELAY);
-        }
-     });
+            });
+
+            mPullToRefreshView.setOnBottomRefreshListener(new PullToRefreshView.OnRefreshListener() {
+                @Override
+                public void onRefresh() {
+                    mPullToRefreshView.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            mPullToRefreshView.setBottomRefreshing(false);
+                        }
+                    }, REFRESH_DELAY);
+                }
+            });
      ```
 
 #Customization
@@ -66,28 +85,14 @@ If you need to change progress state:
 #Compatibility
   
   * Android GINGERBREAD 2.3+
-  
-# Changelog
-
-### Version: 1.2
-
-  * Sample updated with RecyclerView example
-  * Showing the refresh view just in it's bounds. (Issue with transparent / empty ListView)
-  * Possibility to set refresh view padding
-
-### Version: 1.0
-
-  * Initial Build
 
 #### Let us know!
 
-We’d be really happy if you sent us links to your projects where you use our component. Just send an email to github@yalantis.com And do let us know if you have any questions or suggestion regarding the animation. 
-
-P.S. We’re going to publish more awesomeness wrapped in code and a tutorial on how to make UI for Android (iOS) better than better. Stay tuned!
+We’d be really happy if you sent us links to your projects where you use our component. Just send an email to eggsywelsh@gmail.com And do let us know if you have any questions or suggestion regarding the animation.
 
 ## License
 
-    Copyright 2017, Yalantis
+    Copyright 2017, Eggsy
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
