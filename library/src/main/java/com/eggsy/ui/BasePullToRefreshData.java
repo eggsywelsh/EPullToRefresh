@@ -1,9 +1,9 @@
-package com.onemt.ui;
+package com.eggsy.ui;
 
 import android.content.Context;
 import android.widget.ImageView;
 
-import com.onemt.ui.view.SuperRefreshView;
+import com.eggsy.ui.view.SuperRefreshView;
 
 /**
  * Pull to refresh's data

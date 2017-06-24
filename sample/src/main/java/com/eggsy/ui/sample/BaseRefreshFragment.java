@@ -1,4 +1,4 @@
-package com.onemt.ui.sample;
+package com.eggsy.ui.sample;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

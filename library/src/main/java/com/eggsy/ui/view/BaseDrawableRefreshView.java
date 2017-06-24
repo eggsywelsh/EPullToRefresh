@@ -1,4 +1,4 @@
-package com.onemt.ui.view;
+package com.eggsy.ui.view;
 
 import android.content.Context;
 import android.graphics.ColorFilter;
@@ -7,7 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.widget.ImageView;
 
-import com.onemt.ui.PullToRefreshView;
+import com.eggsy.ui.PullToRefreshView;
 
 
 public abstract class BaseDrawableRefreshView extends Drawable implements Drawable.Callback, SuperRefreshView {

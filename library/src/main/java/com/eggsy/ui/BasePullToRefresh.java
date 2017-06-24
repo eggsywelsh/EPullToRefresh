@@ -1,6 +1,6 @@
-package com.onemt.ui;
+package com.eggsy.ui;
 
-import com.onemt.ui.view.SuperRefreshView;
+import com.eggsy.ui.view.SuperRefreshView;
 
 /**
  * base pull to refresh interface

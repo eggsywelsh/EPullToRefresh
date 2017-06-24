@@ -1,4 +1,4 @@
-package com.onemt.ui;
+package com.eggsy.ui;
 
 import android.content.Context;
 import android.util.Log;
@@ -7,9 +7,9 @@ import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Transformation;
 
-import com.onemt.ui.view.SuperRefreshView;
+import com.eggsy.ui.view.SuperRefreshView;
 
-import static com.onemt.ui.PullToRefreshView.MAX_OFFSET_ANIMATION_DURATION;
+import static com.eggsy.ui.PullToRefreshView.MAX_OFFSET_ANIMATION_DURATION;
 
 /**
  * Top refresh component
