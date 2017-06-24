@@ -1,4 +1,4 @@
-package com.onemt.ui.sample.view;
+package com.eggsy.ui.sample.view;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
@@ -19,9 +19,9 @@ import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 
-import com.onemt.ui.PullToRefreshView;
-import com.onemt.ui.R;
-import com.onemt.ui.view.BaseDrawableRefreshView;
+import com.eggsy.ui.PullToRefreshView;
+import com.eggsy.ui.R;
+import com.eggsy.ui.view.BaseDrawableRefreshView;
 
 /**
  * @author chenyongkang

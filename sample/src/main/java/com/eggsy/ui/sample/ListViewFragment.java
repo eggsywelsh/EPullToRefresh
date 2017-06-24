@@ -1,4 +1,4 @@
-package com.onemt.ui.sample;
+package com.eggsy.ui.sample;
 
 import android.content.Context;
 import android.os.Bundle;

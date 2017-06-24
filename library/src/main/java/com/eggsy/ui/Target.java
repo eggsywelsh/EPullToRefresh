@@ -1,4 +1,4 @@
-package com.onemt.ui;
+package com.eggsy.ui;
 
 import android.view.View;
 import android.view.ViewGroup;

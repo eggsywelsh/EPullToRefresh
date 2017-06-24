@@ -1,4 +1,4 @@
-package com.onemt.ui.sample;
+package com.eggsy.ui.sample;
 
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
@@ -9,9 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.onemt.ui.PullToRefreshView;
-import com.onemt.ui.sample.view.LightRefreshView;
-import com.onemt.ui.sample.view.MoreRefreshView;
+import com.eggsy.ui.PullToRefreshView;
+import com.eggsy.ui.sample.view.LightRefreshView;
+import com.eggsy.ui.sample.view.MoreRefreshView;
 
 import java.util.Map;
 

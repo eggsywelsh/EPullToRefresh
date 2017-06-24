@@ -1,4 +1,4 @@
-package com.onemt.ui.util;
+package com.eggsy.ui.util;
 
 import android.content.Context;
 

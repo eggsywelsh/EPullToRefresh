@@ -1,9 +1,9 @@
-package com.onemt.ui.sample.view;
+package com.eggsy.ui.sample.view;
 
 import android.content.Context;
 import android.graphics.drawable.AnimationDrawable;
 
-import com.onemt.ui.view.BaseAnimationRefreshView;
+import com.eggsy.ui.view.BaseAnimationRefreshView;
 
 /**
  * more refreshing view

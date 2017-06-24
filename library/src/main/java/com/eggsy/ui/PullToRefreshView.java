@@ -1,4 +1,4 @@
-package com.onemt.ui;
+package com.eggsy.ui;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -12,8 +12,8 @@ import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 
-import com.onemt.ui.util.Utils;
-import com.onemt.ui.view.SuperRefreshView;
+import com.eggsy.ui.util.Utils;
+import com.eggsy.ui.view.SuperRefreshView;
 
 public class PullToRefreshView extends ViewGroup {
 

@@ -1,4 +1,4 @@
-package com.onemt.ui.view;
+package com.eggsy.ui.view;
 
 import android.graphics.drawable.Animatable;
 import android.graphics.drawable.Drawable;
