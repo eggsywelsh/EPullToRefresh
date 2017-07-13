@@ -47,8 +47,6 @@ public class LightRefreshView extends BaseDrawableRefreshView implements Animata
 
     private PullToRefreshView mParent;
 
-    private Context mContext;
-
     private float mPercent = 0.0f;
 
     private int mAnimationPlayIndex = 0;
@@ -68,8 +66,6 @@ public class LightRefreshView extends BaseDrawableRefreshView implements Animata
     public LightRefreshView(Context context, final PullToRefreshView parent) {
 
         super(context, parent);
-
-        this.mContext = context;
 
         this.mParent = parent;
 

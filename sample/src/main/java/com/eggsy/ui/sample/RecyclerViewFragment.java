@@ -38,7 +38,7 @@ public class RecyclerViewFragment extends BaseRefreshFragment {
         mPullToRefreshView.setTopRefreshView(new LightRefreshView(getActivity(), mPullToRefreshView));
 
         MoreRefreshView moreRefreshView = new MoreRefreshView(getActivity(),
-                            (AnimationDrawable) getResources().getDrawable(R.drawable.list_bottom_load_more));
+                (AnimationDrawable) getResources().getDrawable(R.drawable.list_bottom_load_more));
         mPullToRefreshView.setBottomRefreshView(moreRefreshView);
 
         mPullToRefreshView.setOnTopRefreshListener(new PullToRefreshView.OnRefreshListener() {
@@ -114,13 +114,15 @@ public class RecyclerViewFragment extends BaseRefreshFragment {
     @Override
     public void onResume() {
         super.onResume();
-        /*mPullToRefreshView.setTopRefreshing(true);
+        /*
+        mPullToRefreshView.setTopRefreshing(true);
         mPullToRefreshView.postDelayed(new Runnable() {
             @Override
             public void run() {
                 mPullToRefreshView.setTopRefreshing(false);
             }
-        }, REFRESH_DELAY);*/
+        }, REFRESH_DELAY);
+        */
     }
 
 }
