@@ -14,7 +14,7 @@ public abstract class BaseDrawableRefreshView extends Drawable implements Drawab
 
     private PullToRefreshView mRefreshLayout;
 
-    Context mContext;
+    public Context mContext;
 
     ImageView mContainerView;
 
